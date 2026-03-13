@@ -73,24 +73,6 @@ const config: Config = {
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "mergeQueueSidebar",
-          position: "left",
-          label: "Merge Queue",
-        },
-        {
-          type: "docSidebar",
-          sidebarId: "flakyTestsSidebar",
-          position: "left",
-          label: "Flaky Tests",
-        },
-        {
-          type: "docSidebar",
-          sidebarId: "setupAdminSidebar",
-          position: "left",
-          label: "Setup & Admin",
-        },
-        {
           href: "https://app.trunk.io",
           label: "Open App",
           position: "right",
@@ -153,6 +135,15 @@ const config: Config = {
         "groovy",
         "dart",
       ],
+    },
+    algolia: {
+      // Apply for DocSearch at https://docsearch.algolia.com/apply/
+      // Or use your own Algolia crawler
+      appId: "YOUR_APP_ID",
+      apiKey: "YOUR_SEARCH_ONLY_API_KEY",
+      indexName: "trunk-docs",
+      contextualSearch: true,
+      searchPagePath: "search",
     },
     colorMode: {
       defaultMode: "light",
