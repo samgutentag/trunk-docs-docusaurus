@@ -19,6 +19,7 @@ const config: Config = {
 
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
+  onBrokenAnchors: "warn",
 
   markdown: {
     format: "detect",
@@ -26,6 +27,9 @@ const config: Config = {
       comments: true,
       admonitions: true,
       headingIds: true,
+    },
+    hooks: {
+      onBrokenMarkdownImages: "warn",
     },
   },
 
