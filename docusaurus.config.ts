@@ -11,11 +11,11 @@ const config: Config = {
   tagline: "Ship Software as Fast as AI Writes It",
   favicon: "img/favicon.ico",
 
-  url: "https://docs.trunk.io",
-  baseUrl: "/",
+  url: "https://samgutentag.github.io",
+  baseUrl: "/trunk-docs-docusaurus/",
 
-  organizationName: "trunk-io",
-  projectName: "docs",
+  organizationName: "samgutentag",
+  projectName: "trunk-docs-docusaurus",
 
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
