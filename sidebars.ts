@@ -3,8 +3,14 @@ import type {SidebarsConfig} from "@docusaurus/plugin-content-docs";
 const sidebars: SidebarsConfig = {
   "docsSidebar": [
     {
+      "type": "doc",
+      "id": "index",
+      "label": "Trunk Platform"
+    },
+    {
       "type": "category",
       "label": "Merge Queue",
+      "collapsed": false,
       "link": {
         "type": "doc",
         "id": "merge-queue/merge-queue"
@@ -220,6 +226,7 @@ const sidebars: SidebarsConfig = {
     {
       "type": "category",
       "label": "Flaky Tests",
+      "collapsed": false,
       "link": {
         "type": "doc",
         "id": "flaky-tests/overview"
@@ -575,6 +582,7 @@ const sidebars: SidebarsConfig = {
     {
       "type": "category",
       "label": "Setup & Administration",
+      "collapsed": false,
       "link": {
         "type": "doc",
         "id": "setup-and-administration/connecting-to-trunk"

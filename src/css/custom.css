@@ -1,46 +1,393 @@
-/* Trunk brand colors */
+/* ==========================================================================
+   Trunk Docs – Design system matching docs.trunk.io (GitBook)
+   ========================================================================== */
+
+/* ---------- Fonts ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ---------- Light mode tokens ---------- */
 :root {
-  --ifm-color-primary: #3b82f6;
-  --ifm-color-primary-dark: #2563eb;
-  --ifm-color-primary-darker: #1d4ed8;
-  --ifm-color-primary-darkest: #1e40af;
-  --ifm-color-primary-light: #60a5fa;
-  --ifm-color-primary-lighter: #93bbfd;
-  --ifm-color-primary-lightest: #bfdbfe;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Primary – Trunk blue-ish accent */
+  --ifm-color-primary: #346ddb;
+  --ifm-color-primary-dark: #2358c4;
+  --ifm-color-primary-darker: #1f4fb8;
+  --ifm-color-primary-darkest: #194197;
+  --ifm-color-primary-light: #4f82e2;
+  --ifm-color-primary-lighter: #6392e7;
+  --ifm-color-primary-lightest: #8db2ef;
+
+  /* Typography */
+  --ifm-font-family-base: "Inter", system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --ifm-font-family-monospace: "JetBrains Mono", SFMono-Regular, Menlo,
+    Consolas, monospace;
+  --ifm-font-size-base: 15px;
+  --ifm-line-height-base: 1.7;
+  --ifm-heading-font-weight: 600;
+  --ifm-font-weight-semibold: 600;
+  --ifm-code-font-size: 0.875em;
+
+  /* Layout */
+  --doc-sidebar-width: 280px;
+  --ifm-container-width-xl: 1140px;
+  --ifm-spacing-horizontal: 1.5rem;
+
+  /* Colors */
+  --ifm-background-color: #ffffff;
+  --ifm-color-emphasis-100: #f5f6f7;
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-shadow: 0 1px 0 0 #e8e8e8;
+  --ifm-footer-background-color: #1b1b1d;
+  --ifm-toc-border-color: #e8e8e8;
+
+  /* Sidebar */
+  --trunk-sidebar-bg: #fbfbfc;
+  --trunk-sidebar-border: #ebebeb;
+  --trunk-sidebar-text: #57606a;
+  --trunk-sidebar-text-active: #1a1a1a;
+  --trunk-sidebar-category-text: #1a1a1a;
+  --trunk-sidebar-hover-bg: #f0f1f3;
+  --trunk-sidebar-active-bg: #eef2ff;
+  --trunk-sidebar-active-border: var(--ifm-color-primary);
+
+  /* Misc */
+  --ifm-border-radius: 6px;
+  --ifm-global-radius: 6px;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
+  --ifm-code-background: #f6f8fa;
+  --ifm-code-border-radius: 4px;
+  --ifm-alert-border-radius: 6px;
+  --ifm-alert-border-left-width: 4px;
 }
 
+/* ---------- Dark mode tokens ---------- */
 [data-theme="dark"] {
-  --ifm-color-primary: #60a5fa;
-  --ifm-color-primary-dark: #3b82f6;
-  --ifm-color-primary-darker: #2563eb;
-  --ifm-color-primary-darkest: #1d4ed8;
-  --ifm-color-primary-light: #93bbfd;
-  --ifm-color-primary-lighter: #bfdbfe;
-  --ifm-color-primary-lightest: #dbeafe;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #7ba4f0;
+  --ifm-color-primary-dark: #5a8aeb;
+  --ifm-color-primary-darker: #4a7de8;
+  --ifm-color-primary-darkest: #2a63e0;
+  --ifm-color-primary-light: #9cbef5;
+  --ifm-color-primary-lighter: #aecaf7;
+  --ifm-color-primary-lightest: #d0e0fb;
+
+  --ifm-background-color: #141518;
+  --ifm-navbar-background-color: #1a1b1f;
+  --ifm-navbar-shadow: 0 1px 0 0 #2a2a2e;
+  --ifm-toc-border-color: #2a2a2e;
+
+  --trunk-sidebar-bg: #18191d;
+  --trunk-sidebar-border: #2a2a2e;
+  --trunk-sidebar-text: #9ca3af;
+  --trunk-sidebar-text-active: #f0f0f0;
+  --trunk-sidebar-category-text: #e0e0e0;
+  --trunk-sidebar-hover-bg: #22242a;
+  --trunk-sidebar-active-bg: rgba(123, 164, 240, 0.1);
+  --trunk-sidebar-active-border: var(--ifm-color-primary);
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.07);
+  --ifm-code-background: #1e1f26;
 }
 
-/* Card grid */
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+
+.navbar {
+  border-bottom: 1px solid var(--trunk-sidebar-border);
+  box-shadow: none;
+  padding: 0.5rem 1.25rem;
+}
+
+.navbar__title {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.navbar__logo img {
+  height: 28px;
+}
+
+/* Center the search bar in navbar */
+.navbar .DocSearch {
+  margin: 0 auto;
+}
+
+/* Push search to center by using flex on navbar inner */
+.navbar__inner {
+  flex-wrap: nowrap;
+}
+
+.navbar__items--right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.navbar__items:not(.navbar__items--right) {
+  flex: 1;
+}
+
+/* Search bar styling – wider, centered */
+.navbar .DocSearch-Button {
+  width: 280px;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--trunk-sidebar-border);
+  padding: 0 12px;
+}
+
+[data-theme="dark"] .navbar .DocSearch-Button {
+  background: #22242a;
+  border-color: #2a2a2e;
+}
+
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--trunk-sidebar-border) !important;
+}
+
+nav.menu {
+  background: var(--trunk-sidebar-bg);
+  padding: 0.75rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Category labels (top-level groups) */
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--trunk-sidebar-category-text);
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* First category – no extra top margin */
+.theme-doc-sidebar-item-category:first-child
+  > .menu__list-item-collapsible
+  > .menu__link {
+  margin-top: 0;
+}
+
+/* Regular sidebar links */
+.menu__link {
+  color: var(--trunk-sidebar-text);
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  transition: background 0.15s, color 0.15s;
+}
+
+.menu__link:hover {
+  background: var(--trunk-sidebar-hover-bg);
+  color: var(--trunk-sidebar-text-active);
+}
+
+/* Active link */
+.menu__link--active:not(.menu__link--sublist) {
+  background: var(--trunk-sidebar-active-bg);
+  color: var(--trunk-sidebar-text-active);
+  font-weight: 500;
+  border-left: 3px solid var(--trunk-sidebar-active-border);
+  padding-left: calc(0.75rem - 3px);
+}
+
+/* Nested list indentation */
+.menu__list .menu__list {
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--trunk-sidebar-border);
+  margin-left: 0.75rem;
+}
+
+/* Collapse arrow – hide on top-level categories */
+.theme-doc-sidebar-item-category
+  > .menu__list-item-collapsible
+  > .menu__link--sublist-caret::after {
+  display: none;
+}
+
+/* Keep arrows on nested subcategories, just subtle */
+.menu__list .menu__list .menu__link--sublist-caret::after {
+  display: block;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Content area – match docs.trunk.io width
+   ========================================================================== */
+
+/* Widen main content column */
+.docMainContainer_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Main-styles-module,
+[class*="docMainContainer"] {
+  max-width: 100%;
+}
+
+/* Article content width – GitBook uses ~860px */
+.container .row .col {
+  max-width: 100% !important;
+}
+
+article {
+  max-width: 860px;
+}
+
+.markdown {
+  --ifm-heading-color: #1a1a1a;
+}
+
+[data-theme="dark"] .markdown {
+  --ifm-heading-color: #f0f0f0;
+}
+
+.markdown h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+}
+
+.markdown h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.markdown h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.markdown h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Inline code */
+.markdown code {
+  background: var(--ifm-code-background);
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+  font-size: var(--ifm-code-font-size);
+}
+
+/* Code blocks – no double border */
+.markdown pre code {
+  border: none;
+  padding: 0;
+}
+
+/* Code block container */
+.prism-code {
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* Tables */
+table {
+  font-size: 0.875rem;
+}
+
+table th {
+  background: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+  text-transform: none;
+}
+
+table td,
+table th {
+  border-color: var(--ifm-toc-border-color);
+  padding: 0.6rem 0.9rem;
+}
+
+/* ==========================================================================
+   Admonitions (hints)
+   ========================================================================== */
+
+.alert {
+  border-radius: var(--ifm-alert-border-radius);
+  border-left-width: var(--ifm-alert-border-left-width);
+  font-size: 0.9rem;
+}
+
+.alert .admonition-heading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   Table of contents (right sidebar)
+   ========================================================================== */
+
+.table-of-contents {
+  font-size: 0.8125rem;
+  border-left: 1px solid var(--ifm-toc-border-color);
+}
+
+.table-of-contents__link {
+  color: var(--trunk-sidebar-text);
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer--dark {
+  background: #0d0d0f;
+}
+
+.footer__title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+}
+
+.footer__link-item {
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+.footer__link-item:hover {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Card grid
+   ========================================================================== */
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 0.875rem;
   margin: 1.5rem 0;
 }
 
 .card-grid--large {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
 .card-grid__card {
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 8px;
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 6px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .card-grid__card--link {
@@ -51,7 +398,7 @@
 
 .card-grid__card--link:hover {
   border-color: var(--ifm-color-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   text-decoration: none;
   color: inherit;
 }
@@ -70,16 +417,21 @@
 
 .card-grid__card-title {
   margin: 0 0 0.25rem;
-  font-size: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
 }
 
 .card-grid__card-desc {
   margin: 0;
-  font-size: 0.875rem;
-  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8125rem;
+  color: var(--trunk-sidebar-text);
+  line-height: 1.5;
 }
 
-/* Embed */
+/* ==========================================================================
+   Embed
+   ========================================================================== */
+
 .embed-container {
   width: 100%;
   margin: 1.5rem 0;
@@ -88,10 +440,55 @@
 .embed-link {
   margin: 1rem 0;
   padding: 1rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 8px;
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 6px;
 }
 
 .embed-link a {
   font-weight: 500;
+}
+
+/* ==========================================================================
+   Breadcrumbs
+   ========================================================================== */
+
+.breadcrumbs {
+  font-size: 0.8125rem;
+}
+
+/* ==========================================================================
+   Pagination (prev/next)
+   ========================================================================== */
+
+.pagination-nav__link {
+  border-color: var(--ifm-toc-border-color);
+  border-radius: 6px;
+  transition: border-color 0.15s;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.pagination-nav__sublabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   Scrollbar (subtle)
+   ========================================================================== */
+
+nav.menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+nav.menu::-webkit-scrollbar-thumb {
+  background: var(--trunk-sidebar-border);
+  border-radius: 4px;
+}
+
+nav.menu::-webkit-scrollbar-track {
+  background: transparent;
 }
