@@ -56,7 +56,7 @@ The definition of a particular linter is put under `lint.definitions`. The follo
 
 ## `hold_the_line`
 
-`hold_the_line`: _optional boolean_. Whether [hold-the-line will](/broken/pages/U4nTQBazaodt2vJadyRw#hold-the-line) be done for this linter or not.
+`hold_the_line`: _optional boolean_. Whether [hold-the-line will](../../../../../../index#hold-the-line) be done for this linter or not.
 
 ## `include_lfs`
 

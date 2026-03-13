@@ -6,7 +6,7 @@ The most common Trunk Actions are provided out of the box with trunk, and are tr
 
 There are several different types of Trunk Actions, based on when they are triggered:
 
-<table><thead><tr><th width="186">Trigger</th><th>Description</th></tr></thead><tbody><tr><td>time-based</td><td>run on a schedule (once per hour, once per day, once per week)</td></tr><tr><td>file modification</td><td>run whenever a file or directory in your repo changes.</td></tr><tr><td><a href="git-hooks.md">githooks</a></td><td>run whenever a listed githook event fires (e.g. pre-commit, on-push)</td></tr><tr><td>manual</td><td><code>trunk run &#x3C;action-name></code></td></tr></tbody></table>
+<table><thead><tr><th width="186">Trigger</th><th>Description</th></tr></thead><tbody><tr><td>time-based</td><td>run on a schedule (once per hour, once per day, once per week)</td></tr><tr><td>file modification</td><td>run whenever a file or directory in your repo changes.</td></tr><tr><td><a href="git-hooks">githooks</a></td><td>run whenever a listed githook event fires (e.g. pre-commit, on-push)</td></tr><tr><td>manual</td><td><code>trunk run &#x3C;action-name></code></td></tr></tbody></table>
 
 ### **Command line**
 

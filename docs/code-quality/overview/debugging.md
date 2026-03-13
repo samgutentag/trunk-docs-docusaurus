@@ -2,7 +2,7 @@
 
 ## Why aren't issues showing up anymore?
 
-If you aren’t seeing any issues the likely cause is that your local repo is clean. By default Trunk Code Quality only processes new changes to your codebase (read about [hold-the-line](/broken/pages/U4nTQBazaodt2vJadyRw#hold-the-line)).
+If you aren’t seeing any issues the likely cause is that your local repo is clean. By default Trunk Code Quality only processes new changes to your codebase (read about [hold-the-line](../index#hold-the-line)).
 
 You can use `trunk check` to scan for older, pre-existing lint issues.
 

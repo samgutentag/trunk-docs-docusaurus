@@ -116,10 +116,10 @@ const config: Config = {
         {
           title: "Products",
           items: [
-            { label: "Merge Queue", to: "/merge-queue/merge-queue" },
+            { label: "Merge Queue", to: "/merge-queue/" },
             { label: "Flaky Tests", to: "/flaky-tests/overview" },
-            { label: "CI Autopilot", to: "/ci-autopilot/overview" },
-            { label: "Code Quality", to: "/code-quality/overview" },
+            { label: "CI Autopilot", to: "/ci-autopilot/overview/" },
+            { label: "Code Quality", to: "/code-quality/overview/" },
           ],
         },
         {

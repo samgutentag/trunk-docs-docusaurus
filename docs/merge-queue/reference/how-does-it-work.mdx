@@ -15,7 +15,7 @@ import { Embed } from '@site/src/components/Embed';
 ### **How does a merge queue work?**
 
 1. Instead of merging your pull requests directly through GitHub, engineers submit their pull requests to the merge queues service. A pull request can be submitted to the queue before passing CI or code review is complete. Once the prerequisites for the queue have been met, the pull request will formally enter the queue.
-2. Trunk Merge Queue will test your pull request against the changes ahead of it in the queue so that the changes are tested against the predicted view of the branch, assuming everything ahead of it merges successfully. This process is called [**predictive testing** ](/broken/pages/BAKgbuxqWos5o4kna99T)and is illustrated in the video below.
+2. Trunk Merge Queue will test your pull request against the changes ahead of it in the queue so that the changes are tested against the predicted view of the branch, assuming everything ahead of it merges successfully. This process is called [**predictive testing**](../optimizations/predictive-testing)and is illustrated in the video below.
 3. When all the required tests are passed, Trunk will **squash merge** your pull request into the protected branch automatically.
 4. If your pull requests fail tests, they will either be retested or removed from the queue for further inspection by the author.
 
@@ -33,12 +33,12 @@ predictive testing // test pull requests ahead of you in the queue with your cha
 ### Key concepts
 
 <CardGrid>
-  <Card title="Batching" description="Broken link" href="/broken/pages/mD7GJVG04RV7TvzVP6TY" />
+  <Card title="Batching" description="Batch multiple PRs together for testing" href="../optimizations/batching" />
   <Card title="Dynamic Parallel Queues" description="parallel-queues" href="../optimizations/parallel-queues/" />
-  <Card title="Optimistic Merging" description="Broken link" href="/broken/pages/k2ELH7R7uPCqaNixtx1z" />
-  <Card title="Pending Failure Depth" description="Broken link" href="/broken/pages/IGzom8tXDLaKeBr95ciF" />
-  <Card title="Prioritization" description="Broken link" href="/broken/pages/KBGLXshIgaxHjvuU5rpy" />
-  <Card title="Flaky Test Protection" description="Broken link" href="/broken/pages/eP3tevVEeuSPwyO2f6yo" />
+  <Card title="Optimistic Merging" description="Merge PRs optimistically when tests pass" href="../optimizations/optimistic-merging" />
+  <Card title="Pending Failure Depth" description="Control how deep failures propagate in the queue" href="../optimizations/pending-failure-depth" />
+  <Card title="Prioritization" description="Set priority levels for PRs in the queue" href="../optimizations/priority-merging" />
+  <Card title="Flaky Test Protection" description="Protect your queue from flaky tests" href="../optimizations/anti-flake-protection" />
 </CardGrid>
 
 <Embed url="https://youtu.be/V74t41-uV7I" />

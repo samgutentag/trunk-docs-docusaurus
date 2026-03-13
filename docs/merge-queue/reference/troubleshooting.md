@@ -11,10 +11,10 @@ Visit [Trunk Support](../../setup-and-administration/support) for additional ass
 If your test PR doesn't merge automatically:
 
 * **Check the status comments for the PR in** the [Trunk Dashboard](https://app.trunk.io/) to see what it's waiting for
-* **Stuck in "Queued"**: Usually means branch protection rules haven't passed (missing required status checks or code review) or there are merge conflicts. If the status looks correct but the PR still won't enter the queue, try [removing](/broken/pages/c7O7hgOoGwFcANCdzUMZ#manually-restarting-failed-prs) and re-adding by commenting `/trunk merge` again on the PR.
+* **Stuck in "Queued"**: Usually means branch protection rules haven't passed (missing required status checks or code review) or there are merge conflicts. If the status looks correct but the PR still won't enter the queue, try removing and re-adding by commenting `/trunk merge` again on the PR.
 * **Fails when attempting to merge**: Check that squash merges are enabled for your repository in GitHub settings (`Settings > General > Allow squash merging`). Trunk Merge Queue requires squash merges to be enabled.
-* **"Permission denied" errors**: Review the [Branch Protection](/broken/pages/zvDo6oVz6lP1OOz5wOUB#configure-branch-protection-rules) guide to ensure `trunk-temp/*` and `trunk-merge/*` branches aren't protected by wildcard rules like `*/*`.
-* **Status checks not running**: Verify your CI is configured to run on draft PRs (or `trunk-merge/**` branches if using push-triggered mode). See the [Branch Protection](/broken/pages/zvDo6oVz6lP1OOz5wOUB#configure-branch-protection-rules) guide for details.
+* **"Permission denied" errors**: Review the [Branch Protection](../../merge-queue/getting-started/configure-branch-protection) guide to ensure `trunk-temp/*` and `trunk-merge/*` branches aren't protected by wildcard rules like `*/*`.
+* **Status checks not running**: Verify your CI is configured to run on draft PRs (or `trunk-merge/**` branches if using push-triggered mode). See the [Branch Protection](../../merge-queue/getting-started/configure-branch-protection) guide for details.
 
 ###
 
