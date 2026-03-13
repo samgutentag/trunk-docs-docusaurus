@@ -1,0 +1,99 @@
+---
+title: Configuring swift-testing
+description: A guide for generating Trunk-compatible test reports with Swift Testing
+---
+
+import ThemedImage from '@theme/ThemedImage';
+import { CardGrid, Card } from '@site/src/components/CardGrid';
+
+
+# Swift Testing
+
+You can automatically [detect and manage flaky tests](../../detection) in your Swift projects by integrating with Trunk. This document explains how to configure Swift Testing to output JUnit XML reports that can be uploaded to Trunk for analysis.
+
+### Checklist
+
+By the end of this guide, you should achieve the following before proceeding to the [next steps](swift-testing#next-step) to configure your CI provider.
+
+* [ ] Generate a compatible test report
+* [ ] Configure the report file path or glob
+* [ ] Disable retries for better detection accuracy
+* [ ] Test uploads locally
+
+After correctly generating reports following the above steps, you'll be ready to move on to the next steps to [configure uploads in CI](../ci-providers/).
+
+### Generating Reports
+
+Trunk detects flaky tests by analyzing test reports automatically uploaded from your CI jobs. You can do this by generating Trunk-compatible XML reports from your test runs.
+
+To output a compatible report, add the `--xunit-output` argument to your Swift test command:
+
+```shell
+swift test --xunit-output junit.xml --parallel
+```
+
+Due to a [known bug](https://github.com/swiftlang/swift-package-manager/issues/4752) with Swift, you must include the `--parallel` flag for the XML report to output properly.
+
+#### Report File Path
+
+The test report will be written to the location specified by the `--xunit-output` argument. In the example above, it would be at `./junit.xml`.
+
+#### Disable Retries
+
+You need to disable automatic retries if you previously enabled them. Retries compromise the accurate detection of flaky tests.
+
+Swift Testing doesn't support retries out of the box, but if you implemented retries or imported a package, remember to disable them.
+
+### Try It Locally
+
+#### **The Validate Command**
+
+You can validate your test reports using the [Trunk CLI](../../uploader). If you don't have it installed already, you can install and run the `validate` command like this:
+
+```bash
+curl https://get.trunk.io -fsSL | bash
+trunk flakytests validate --junit-paths "./junit.xml"
+```
+
+**This will not upload anything to Trunk**. To improve detection accuracy, you should **address all errors and warnings** before proceeding to the next steps.
+
+#### Test Upload
+
+Before modifying your CI jobs to automatically upload test results to Trunk, try uploading a single test run manually.
+
+You make an upload to Trunk using the following command:
+
+```sh
+trunk flakytests upload --junit-paths "./junit.xml" \
+    --org-url-slug <TRUNK_ORG_SLUG> \
+    --token <TRUNK_ORG_TOKEN>
+```
+
+You can find your Trunk organization slug and token in the settings or by following these [instructions](https://docs.trunk.io/flaky-tests/get-started/ci-providers/otherci#id-1.-store-a-trunk_token-secret-in-your-ci-system). After your upload, you can verify that Trunk has received and processed it successfully in the **Uploads** tab. Warnings will be displayed if the report has issues.
+
+<ThemedImage
+  alt=""
+  sources={{
+    light: "/img/data-uploads-light.png",
+    dark: "/img/data-uploads-dark.png",
+  }}
+/>
+
+### Next Steps
+
+Configure your CI to upload test runs to Trunk. Find the guides for your CI framework below:
+
+<CardGrid>
+  <Card title="Azure DevOps Pipelines" href="../ci-providers/azure-devops-pipelines" />
+  <Card title="BitBucket Pipelines" href="../ci-providers/bitbucket-pipelines" />
+  <Card title="BuildKite" href="../ci-providers/buildkite" />
+  <Card title="CircleCI" href="../ci-providers/circleci" />
+  <Card title="Drone CI" href="../ci-providers/droneci" />
+  <Card title="GitHub Actions" href="../ci-providers/github-actions" />
+  <Card title="Gitlab" href="../ci-providers/gitlab" />
+  <Card title="Jenkins" href="../ci-providers/jenkins" />
+  <Card title="Semaphore" href="../ci-providers/semaphoreci" />
+  <Card title="TeamCity" href="broken-reference/" />
+  <Card title="Travis CI" href="../ci-providers/travisci" />
+  <Card title="Other CI Providers" href="../ci-providers/otherci" />
+</CardGrid>

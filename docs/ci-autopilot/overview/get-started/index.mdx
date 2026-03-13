@@ -1,0 +1,58 @@
+---
+description: Get started with Trunk's CI Autopilot
+---
+
+import { CardGrid, Card } from '@site/src/components/CardGrid';
+import { Embed } from '@site/src/components/Embed';
+
+
+# Get Started
+
+CI Autopilot automatically investigates CI failures in your pull requests and provides root cause analysis with suggested fixes, saving your team hours of debugging time. This guide covers two setup options: basic GitHub integration and enhanced test-level analysis.
+
+
+
+### Watch the walk through
+
+Check out the 3-minute demo below, highlighting steps required to get started.
+
+<Embed url="https://www.loom.com/share/ed04646591024e1ca2554a95a91bbad8" />
+CI Autopilot setup and demo
+\{% endembed %\}
+
+
+
+### Setup options
+
+**Basic setup (5 minutes):** Connect CI Autopilot to your GitHub repository to get failure analysis from CI logs.
+
+**Enhanced setup (+10 minutes):** Add structured test reports for precise, test-level analysis with more targeted fix recommendations.
+
+#### Basic vs enhanced setup
+
+| Feature             | Basic Setup         | Enhanced Setup                    |
+| ------------------- | ------------------- | --------------------------------- |
+| **Analysis Source** | General CI logs     | Individual test results + CI logs |
+| **Fix Precision**   | General suggestions | Test-specific, targeted fixes     |
+| **Setup Time**      | 5 minutes           | 15 minutes total                  |
+| **Recommended For** | Quick start         | Comprehensive analysis            |
+
+
+
+### Prerequisites
+
+* GitHub repository with GitHub Action workflows
+* Admin access to your GitHub organization
+* [Trunk account](https://app.trunk.io/signup?intent=flaky%20tests)
+
+
+
+### Get started
+
+Follow the following guides to get started with CI Autopilot.
+
+<CardGrid>
+  <Card title="Basic setup: Connect to GitHub" description="connect-to-github.md" href="connect-to-github" />
+  <Card title="Enhanced setup: Upload test reports" description="upload-test-reports.md" href="upload-test-reports" />
+</CardGrid>
+

@@ -1,0 +1,113 @@
+---
+description: A guide for generating Trunk-compatible test reports for Nightwatch
+---
+
+import ThemedImage from '@theme/ThemedImage';
+import { CardGrid, Card } from '@site/src/components/CardGrid';
+
+
+# Nightwatch
+
+You can automatically [detect and manage flaky tests](../../detection) in your Nightwatch projects by integrating with Trunk. This document explains how to configure Nightwatch to output JUnit XML reports that can be uploaded to Trunk for analysis.
+
+### Checklist
+
+By the end of this guide, you should achieve the following before proceeding to the [next steps](nightwatch#next-step) to configure your CI provider.
+
+* [ ] Generate a compatible test report
+* [ ] Configure the report file path or glob
+* [ ] Disable retries for better detection accuracy
+* [ ] Test uploads locally
+
+After correctly generating reports following the above steps, you'll be ready to move on to the next steps to [configure uploads in CI](../ci-providers/).
+
+### Generating Reports
+
+Nightwatch will automatically report test results in multiple formats. You can configure the output location by updating the `nightwatch.conf.cjs` config file.
+
+```javascript
+module.exports = {
+  output_folder: 'test-reports',
+  ...
+}
+```
+
+You can also specify output at runtime with the command line option `--output <OUTPUT_FOLDER>`:
+
+```sh
+nightwatch --output ./test-reports
+```
+
+#### Report File Path
+
+Nightwatch outputs multiple reports for each test suite under the specified output folder.
+
+If you configured your output folder to be under `./test-reports`, the JUnit XML files will be found under `./test-reports/**`. You can upload multiple JUnit reports by using a glob like `./test-reports/**/*.xml`.
+
+:::warning
+
+**Duplicate Uploads**
+
+When using globs, it's important to clean up old test reports between test runs. If your glob path contains old JUnit files, uploading old test results can cause tests to be mislabeled.
+
+:::
+
+#### Disable Retries
+
+You need to disable automatic retries if you previously enabled them. Retries compromise the accurate detection of flaky tests.
+
+Nightwatch doesn't implement any form of automatic retry for failed or flaky tests by default. If you have a custom implementation of retries, remember to disable them.
+
+### Try It Locally
+
+#### **The Validate Command**
+
+You can validate your test reports using the [Trunk CLI](../../uploader). If you don't have it installed already, you can install and run the `validate` command like this:
+
+```bash
+curl https://get.trunk.io -fsSL | bash
+trunk flakytests validate --junit-paths "./junit.xml"
+```
+
+**This will not upload anything to Trunk**. To improve detection accuracy, you should **address all errors and warnings** before proceeding to the next steps.
+
+#### Test Upload
+
+Before modifying your CI jobs to automatically upload test results to Trunk, try uploading a single test run manually.
+
+You make an upload to Trunk using the following command:
+
+```sh
+trunk flakytests upload --junit-paths "./test-reports/**/*.xml" \
+    --org-url-slug <TRUNK_ORG_SLUG> \
+    --token <TRUNK_ORG_TOKEN>
+```
+
+You can find your Trunk organization slug and token in the settings or by following these [instructions](https://docs.trunk.io/flaky-tests/get-started/ci-providers/otherci#id-1.-store-a-trunk_token-secret-in-your-ci-system). After your upload, you can verify that Trunk has received and processed it successfully in the **Uploads** tab. Warnings will be displayed if the report has issues.
+
+<ThemedImage
+  alt=""
+  sources={{
+    light: "/img/data-uploads-light.png",
+    dark: "/img/data-uploads-dark.png",
+  }}
+/>
+
+### Next Steps
+
+Configure your CI to upload test runs to Trunk. Find the guides for your CI framework below:
+
+<CardGrid>
+  <Card title="Azure DevOps Pipelines" href="../ci-providers/azure-devops-pipelines" />
+  <Card title="BitBucket Pipelines" href="../ci-providers/bitbucket-pipelines" />
+  <Card title="BuildKite" href="../ci-providers/buildkite" />
+  <Card title="CircleCI" href="../ci-providers/circleci" />
+  <Card title="Drone CI" href="../ci-providers/droneci" />
+  <Card title="GitHub Actions" href="../ci-providers/github-actions" />
+  <Card title="Gitlab" href="../ci-providers/gitlab" />
+  <Card title="Jenkins" href="../ci-providers/jenkins" />
+  <Card title="Semaphore" href="../ci-providers/semaphoreci" />
+  <Card title="TeamCity" href="broken-reference/" />
+  <Card title="Travis CI" href="../ci-providers/travisci" />
+  <Card title="Other CI Providers" href="../ci-providers/otherci" />
+</CardGrid>

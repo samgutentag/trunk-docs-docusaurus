@@ -1,0 +1,107 @@
+---
+title: Configuring cypress
+description: A guide for generating Trunk-compatible test reports for Cypress tests
+---
+
+import ThemedImage from '@theme/ThemedImage';
+import { CardGrid, Card } from '@site/src/components/CardGrid';
+
+
+# Cypress
+
+You can automatically [detect and manage flaky tests](../../detection) in your Cypress projects by integrating with Trunk. This document explains how to configure Cypress to output JUnit XML reports that can be uploaded to Trunk for analysis.
+
+### Checklist
+
+By the end of this guide, you should achieve the following before proceeding to the [next steps](cypress#next-step) to configure your CI provider.
+
+* [ ] Generate a compatible test report
+* [ ] Configure the report file path or glob
+* [ ] Disable retries for better detection accuracy
+* [ ] Test uploads locally
+
+After correctly generating reports following the above steps, you'll be ready to move on to the next steps to [configure uploads in CI](../ci-providers/).
+
+### Generating Reports
+
+Cypress has a built-in XML reporter which you can use to output a Trunk-compatible report.
+
+Update your Cypress config, such as you `cypress.config.js` or `cypress.config.ts` file to output XML reports:
+
+```javascript title="cypress.config.js"
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  reporter: 'junit',
+  reporterOptions: {
+    mochaFile: './junit.xml',
+    toConsole: true,
+  },
+})
+```
+
+#### Report File Path
+
+The JUnit report location is specified by the `mochaFile` property in your Cypress config. In the above example, the file will be at `./junit.xml`.
+
+#### Disable Retries
+
+You need to disable automatic retries if you previously enabled them. Retries compromise the accurate detection of flaky tests.
+
+You can disable retries by setting `retries: 0` in your Cypress config file.
+
+```javascript title="cypress.config.js"
+module.exports = defineConfig({
+  retries: 0,
+})
+```
+
+### Try It Locally
+
+#### **The Validate Command**
+
+```bash
+curl https://get.trunk.io -fsSL | bash
+trunk flakytests validate --junit-paths "./junit.xml"
+```
+
+#### Test Upload
+
+Before modifying your CI jobs to automatically upload test results to Trunk, try uploading a single test run manually.
+
+You make an upload to Trunk using the following command:
+
+```sh
+trunk flakytests upload --junit-paths "./junit.xml" \
+    --org-url-slug <TRUNK_ORG_SLUG> \
+    --token <TRUNK_ORG_TOKEN>
+```
+
+You can find your Trunk organization slug and token in the settings or by following these [instructions](https://docs.trunk.io/flaky-tests/get-started/ci-providers/otherci#id-1.-store-a-trunk_token-secret-in-your-ci-system). After your upload, you can verify that Trunk has received and processed it successfully in the **Uploads** tab. Warnings will be displayed if the report has issues.
+
+<ThemedImage
+  alt=""
+  sources={{
+    light: "/img/data-uploads-light.png",
+    dark: "/img/data-uploads-dark.png",
+  }}
+/>
+
+## Next Step
+
+Configure your CI to upload test runs to Trunk. Find the guides for your CI framework below:
+
+<CardGrid>
+  <Card title="Azure DevOps Pipelines" href="../ci-providers/azure-devops-pipelines" />
+  <Card title="BitBucket Pipelines" href="../ci-providers/bitbucket-pipelines" />
+  <Card title="BuildKite" href="../ci-providers/buildkite" />
+  <Card title="CircleCI" href="../ci-providers/circleci" />
+  <Card title="Drone CI" href="../ci-providers/droneci" />
+  <Card title="GitHub Actions" href="../ci-providers/github-actions" />
+  <Card title="Gitlab" href="../ci-providers/gitlab" />
+  <Card title="Jenkins" href="../ci-providers/jenkins" />
+  <Card title="Semaphore" href="../ci-providers/semaphoreci" />
+  <Card title="TeamCity" href="broken-reference/" />
+  <Card title="Travis CI" href="../ci-providers/travisci" />
+  <Card title="Other CI Providers" href="../ci-providers/otherci" />
+</CardGrid>

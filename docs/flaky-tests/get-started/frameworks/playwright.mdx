@@ -1,0 +1,121 @@
+---
+title: Configuring playwright
+description: A guide for generating Trunk-compatible test reports for Playwright
+---
+
+import ThemedImage from '@theme/ThemedImage';
+import { CardGrid, Card } from '@site/src/components/CardGrid';
+
+
+# Playwright
+
+You can automatically [detect and manage flaky tests](../../detection) in your Playwright projects by integrating with Trunk. This document explains how to configure Playwright to output JUnit XML reports that can be uploaded to Trunk for analysis.
+
+### Checklist
+
+By the end of this guide, you should achieve the following before proceeding to the [next steps](playwright#next-step) to configure your CI provider.
+
+* [ ] Generate a compatible test report
+* [ ] Configure the report file path or glob
+* [ ] Disable retries for better detection accuracy
+* [ ] Test uploads locally
+
+After correctly generating reports following the above steps, you'll be ready to move on to the next steps to [configure uploads in CI](../ci-providers/).
+
+### Generating Reports
+
+Playwright has multiple built-in reporters, including JUnit XML which Trunk can ingest. To get XML reports, add the following to your Playwright config:
+
+```typescript title="playwright.config.ts"
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  reporter: [
+    ['junit', { outputFile: 'junit.xml' }]
+  ],
+});
+```
+
+Alternatively, you can specify reporting behavior inline in your CI:
+
+```sh
+npx playwright test --reporter=junit
+```
+
+#### Report File Path
+
+You can specify the report's output location with the `PLAYWRIGHT_JUNIT_OUTPUT_FILE` environment variable:
+
+```sh
+export PLAYWRIGHT_JUNIT_OUTPUT_FILE=junit.xml
+```
+
+You can also specify the report's location in your `playwright.config.ts` file:
+
+```typescript
+export default defineConfig({
+  reporter: [
+    ['junit', { outputFile: 'junit.xml' }]
+  ],
+});
+```
+
+#### Disable Retries
+
+You need to disable automatic retries if you previously enabled them. Retries compromise the accurate detection of flaky tests. You should disable retries for accurate detection and use the [Quarantining](../../quarantining) feature to stop flaky tests from failing your CI jobs.
+
+You can disable retries in Playwright by omitting the `--retries` command line option and [removing retries in your `playwright.config.ts` file](https://playwright.dev/docs/test-retries#retries).
+
+### Try It Locally
+
+#### **The Validate Command**
+
+You can validate your test reports using the [Trunk CLI](../../uploader). If you don't have it installed already, you can install and run the `validate` command like this:
+
+```bash
+curl https://get.trunk.io -fsSL | bash
+trunk flakytests validate --junit-paths "./junit.xml"
+```
+
+**This will not upload anything to Trunk**. To improve detection accuracy, you should **address all errors and warnings** before proceeding to the next steps.
+
+#### Test Upload
+
+Before modifying your CI jobs to automatically upload test results to Trunk, try uploading a single test run manually.
+
+You make an upload to Trunk using the following command:
+
+```sh
+trunk flakytests upload --junit-paths "./junit.xml" \
+    --org-url-slug <TRUNK_ORG_SLUG> \
+    --token <TRUNK_ORG_TOKEN>
+```
+
+You can find your Trunk organization slug and token in the settings or by following these [instructions](https://docs.trunk.io/flaky-tests/get-started/ci-providers/otherci#id-1.-store-a-trunk_token-secret-in-your-ci-system). After your upload, you can verify that Trunk has received and processed it successfully in the **Uploads** tab. Warnings will be displayed if the report has issues.
+
+<ThemedImage
+  alt=""
+  sources={{
+    light: "/img/data-uploads-light.png",
+    dark: "/img/data-uploads-dark.png",
+  }}
+/>
+
+## Next Step
+
+Configure your CI to upload test runs to Trunk. Find the guides for your CI framework below:
+
+<CardGrid>
+  <Card title="Azure DevOps Pipelines" href="../ci-providers/azure-devops-pipelines" />
+  <Card title="BitBucket Pipelines" href="../ci-providers/bitbucket-pipelines" />
+  <Card title="BuildKite" href="../ci-providers/buildkite" />
+  <Card title="CircleCI" href="../ci-providers/circleci" />
+  <Card title="Drone CI" href="../ci-providers/droneci" />
+  <Card title="GitHub Actions" href="../ci-providers/github-actions" />
+  <Card title="Gitlab" href="../ci-providers/gitlab" />
+  <Card title="Jenkins" href="../ci-providers/jenkins" />
+  <Card title="Semaphore" href="../ci-providers/semaphoreci" />
+  <Card title="TeamCity" href="broken-reference/" />
+  <Card title="Travis CI" href="../ci-providers/travisci" />
+  <Card title="Other CI Providers" href="../ci-providers/otherci" />
+</CardGrid>

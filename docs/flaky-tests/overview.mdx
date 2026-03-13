@@ -1,0 +1,121 @@
+---
+description: Detect, quarantine, and eliminates flaky tests from your codebase
+---
+
+import ThemedImage from '@theme/ThemedImage';
+import { CardGrid, Card } from '@site/src/components/CardGrid';
+import { Embed } from '@site/src/components/Embed';
+
+
+# Overview
+
+Trunk Flaky Tests lets your teams detect, track, quarantine, and fix **flaky tests** in your codebase. Flaky Tests is language, environment, and framework-agnostic.
+
+Let's explore how Trunk Flaky Tests' features help you tackle Flaky Tests. If you can't wait to try Trunk, follow our [getting started guide](https://docs.trunk.io/flaky-tests/get-started).
+
+You can see an overview of Trunk Flaky Tests in this video.
+
+<Embed url="https://youtu.be/ORE30UUvOJk" />
+
+### Understand the impact
+
+Your dashboard shows a comprehensive overview of your test suite's health at a glance. It lets you see important impact metrics like the number of flaky tests, broken tests, PRs impacted by flaky tests, and PRs rescued by quarantining flaky tests.
+
+<ThemedImage
+  alt="Key repo metrics"
+  sources={{
+    light: "/img/key-metrics-light.png",
+    dark: "/img/key-metrics-dark.png",
+  }}
+/>
+
+To learn more, [see how Flaky Tests does detection](https://docs.trunk.io/flaky-tests/detection).
+
+### Track every flaky test
+
+You can find a list of known flaky tests complete with important information like their impact on PRs and if someone's working on a fix. For more granularity, you can also inspect individual tests for their execution history, results, and status changes.
+
+<ThemedImage
+  alt="List of flaky tests"
+  sources={{
+    light: "/img/flaky-tests-overview-table-v2-light.png",
+    dark: "/img/flaky-tests-overview-table-v2-dark.png",
+  }}
+/>
+
+To learn more, [see how Flaky Tests does detection](https://docs.trunk.io/flaky-tests/detection).
+
+### Stay in sync
+
+<ThemedImage
+  alt="PR comment linking to PR Test Summary"
+  sources={{
+    light: "/img/github-comment-light.png",
+    dark: "/img/github-comment-dark.png",
+  }}
+/>
+
+Flaky Tests helps everyone in your team stay in sync about flaky test failures with [GitHub PR comments](https://docs.trunk.io/flaky-tests/github-pull-request-comments), so no time is wasted debugging failures from known flaky tests.
+
+To learn more, [see our docs about GitHub Comments and Test Summaries](github-pull-request-comments).
+
+### Investigate flaky failures
+
+Flaky Tests creates detailed reports for individual test failures so you can debug faster.
+
+<ThemedImage
+  alt="Summary of unique failure types"
+  sources={{
+    light: "/img/unique-failure-reason-light.png",
+    dark: "/img/unique-failure-reason-dark.png",
+  }}
+/>
+
+Test details will summarize all the unique ways a flaky test fails and let you flip through the relevant stack traces in the Trunk app.
+
+<ThemedImage
+  alt="Full failure stack traces"
+  sources={{
+    light: "/img/run-details-light.png",
+    dark: "/img/run-details-dark.png",
+  }}
+/>
+
+To learn more, [see our docs about the detection of flaky tests](detection#test-case-details).
+
+### **Quarantine flaky failures**
+
+Flaky Tests allows you to [quarantine](https://docs.trunk.io/flaky-tests/quarantining) detected flaky tests, stopping them from failing your CI jobs. This prevents failed flaky tests from impacting your CI pipelines, so you won’t have to disable tests and won’t be slowed down by flaky CI jobs.
+
+<ThemedImage
+  alt="flaky tests can be quarantined automatically or manually"
+  sources={{
+    light: "/img/override-light.png",
+    dark: "/img/override-dark.png",
+  }}
+/>
+
+To learn more, [see our docs about quarantining tests](quarantining).
+
+### Manage tickets
+
+<ThemedImage
+  alt="Creating a Jira ticket for a flaky test"
+  sources={{
+    light: "/img/jira-ticket-creation-light.png",
+    dark: "/img/jira-ticket-creation-dark.png",
+  }}
+/>
+
+Trunk enables the automation of quickly creating and assigning tickets through integrations with platforms like Jira and Linear, as well as custom workflows with webhooks. The status of tickets created will be reflected in real-time in the Trunk web app. This helps you track efforts to fix high-impact, flaky tests.
+
+To learn more, [learn about our ticketing integrations](ticketing-integrations/jira-integration).
+
+### **Next steps**
+
+<CardGrid>
+  <Card title="Getting started" href="get-started/" />
+  <Card title="Create an account" href="https://app.trunk.io/signup?intent=flaky+tests" />
+</CardGrid>
+
+Start finding flaky tests today by [signing up for Trunk](https://app.trunk.io/signup?intent=flaky%20tests) or reading our [Getting Started guides](get-started/).
