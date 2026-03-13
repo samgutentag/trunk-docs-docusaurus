@@ -82,18 +82,6 @@ const config: Config = {
         },
         {
           type: "docSidebar",
-          sidebarId: "ciAutopilotSidebar",
-          position: "left",
-          label: "CI Autopilot",
-        },
-        {
-          type: "docSidebar",
-          sidebarId: "codeQualitySidebar",
-          position: "left",
-          label: "Code Quality",
-        },
-        {
-          type: "docSidebar",
           sidebarId: "setupAdminSidebar",
           position: "left",
           label: "Setup & Admin",
@@ -118,8 +106,6 @@ const config: Config = {
           items: [
             { label: "Merge Queue", to: "/merge-queue/" },
             { label: "Flaky Tests", to: "/flaky-tests/overview" },
-            { label: "CI Autopilot", to: "/ci-autopilot/overview/" },
-            { label: "Code Quality", to: "/code-quality/overview/" },
           ],
         },
         {
